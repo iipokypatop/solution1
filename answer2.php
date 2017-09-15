@@ -13,3 +13,18 @@ function arrayMakeKeysLinear(array $array_or_scalar, &$res = [], $keys = [])
         return $res;
     } 
      
+
+function arrayRestoreFromLinearKeys($array)
+    {
+        $res = [];
+        foreach ($array as $composite_key => $v) {
+            $link =& $res;
+            $parts = explode('.', $composite_key);
+            foreach ($parts as $key) {
+                $link =& $link[$key];
+            }
+            $link = $v;
+        }
+
+        return $res;
+    }
